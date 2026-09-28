@@ -16,6 +16,6 @@ Selecciona contactos por especialidad/desempeño en `proveedores`; crea un borra
 - Detecta duplicados (mismo hash por dos canales) y versiones (`reemplaza_a`); si hay conflicto entre canales, muestra la discrepancia y pide confirmación.
 - Fuente `declarado` ⇒ prepara borrador de correo al proveedor pidiendo **ratificación escrita** de precio, plazo y condiciones.
 ## Homologación (Fase 2)
-Compara cada cotización con el TdR: ítems, cantidades, unidades, marcas, plazos, garantías, IGV, transporte, exclusiones. Estados: `HOMOLOGADA` / `HOMOLOGADA_CON_OBSERVACIONES` / `NO_HOMOLOGADA`. Redacta consultas de aclaración al proveedor (borrador).
+Compara cada cotización con el TdR: ítems, cantidades, unidades, marcas, plazos, garantías, IGV, transporte, exclusiones. Si el TdR es **Tipo 2** (`templates/tdr-tipo2-sistema.md`), homologa también contra los **criterios de evaluación y aceptación cuantificados** de su Sección 6 (cobertura, ruido, precisión, etc.): una oferta que no los cumple o no los declara queda `HOMOLOGADA_CON_OBSERVACIONES` o `NO_HOMOLOGADA`, no solo por precio/ítems. Estados: `HOMOLOGADA` / `HOMOLOGADA_CON_OBSERVACIONES` / `NO_HOMOLOGADA`. Redacta consultas de aclaración al proveedor (borrador).
 ## Ajuste y negociación (Fase 2)
 Aplica P01–P03: consulta `v_mejor_precio_historico` y `condiciones_cerradas`; propone borradores con evidencia (precio previo, fecha, volumen). No cambies condiciones críticas unilateralmente.

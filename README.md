@@ -16,7 +16,7 @@ presupuesto, política). Memoria persistente en **Supabase (Postgres)**. Mismo p
 ```
 CLAUDE.md                 ← instrucciones del CPO y flujos
 agents/*/SKILL.md         ← 6 agentes
-templates/                ← TdR, comparativo CBA, decision record, brechas, carta feedback, registro manual
+templates/                ← TdR (Tipo 1 especialidad / Tipo 2 sistema), comparativo CBA, decision record, brechas, carta feedback, registro manual
 policies/                 ← seguridad, reglas de política, config de correo Outlook, ingreso multicanal
 db/schema.sql             ← esquema Supabase
 ```
