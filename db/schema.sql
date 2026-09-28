@@ -112,16 +112,21 @@ from cotizacion_items ci join cotizaciones c on c.id = ci.cotizacion_id
 where c.homologacion in ('HOMOLOGADA','HOMOLOGADA_CON_OBSERVACIONES')
 group by ci.item, ci.unidad;
 
-create table criterios_cba (
+create table criterios_cba (              -- factores (los 'must' ya se resolvieron en homologación; aquí quedan los 'want' a comparar)
   id uuid primary key default gen_random_uuid(),
   paquete_id uuid references paquetes(id),
   factor text not null, tipo text check (tipo in ('must','want')),
-  peso_importancia numeric, definido_con text, aprobado_en timestamptz
+  definido_con text, aprobado_en timestamptz
 );
-create table evaluaciones_cba (
+create table evaluaciones_cba (             -- una fila por (factor, alternativa): atributo, si es el ancla (LPA), ventaja sobre el ancla, importancia de esa ventaja
   id uuid primary key default gen_random_uuid(),
   paquete_id uuid references paquetes(id), cotizacion_id uuid references cotizaciones(id),
-  factor text, atributo text, ventaja text, importancia numeric
+  factor text not null, atributo text not null,
+  es_ancla boolean default false,           -- true = Atributo Menos Preferido (LPA) de este factor; su ventaja es 0 por definición
+  ventaja text,                             -- diferencia real y cuantificable sobre el ancla (vacío/0 si es_ancla=true)
+  importancia numeric,                      -- 0-100; 100 solo en la ventaja "paramount" del paquete completo; nunca se pondera el factor, solo la ventaja
+  justificacion text,
+  check (not es_ancla or importancia is null or importancia = 0)   -- el ancla no lleva importancia > 0
 );
 
 create table evaluaciones_proveedor (
